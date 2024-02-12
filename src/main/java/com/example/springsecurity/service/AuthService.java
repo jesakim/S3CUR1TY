@@ -102,9 +102,8 @@ public class AuthService {
 
     public Response<TokenDto> refreshToken(com.example.springsecurity.dto.request.TokenDto tokenDto) {
         Token userToken = tokenRepository.findByToken(tokenDto.token()).orElseThrow(() -> new RuntimeException("Token not found"));
-        if (userToken.isRevoked() || userToken.isExpired()) {
-            throw new IllegalArgumentException("Token is revoked or expired");
-        }
+        if (userToken.isRevoked() || userToken.isExpired())
+            throw new RuntimeException("Token is revoked or expired");
         User user = userToken.getUser();
         return saveAndGetTokenResponse(user);
     }

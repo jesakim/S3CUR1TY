@@ -24,4 +24,9 @@ public class UserController {
         return ResponseEntity.ok(userService.me());
     }
 
+    @GetMapping("/exception")
+    public ResponseEntity<Response<String>> exception() {
+        throw new RuntimeException("This is a runtime exception");
+    }
+
 }
