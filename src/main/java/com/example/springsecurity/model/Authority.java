@@ -22,8 +22,7 @@ public class Authority implements GrantedAuthority{
     @ManyToMany(mappedBy = "authorities")
     private Set<User> users = new HashSet<>();
 
-    public Authority(int id,String name) {
-        this.id = (long)id;
+    public Authority(String name) {
         this.name = name;
     }
 
@@ -31,6 +30,7 @@ public class Authority implements GrantedAuthority{
     public String getAuthority() {
         return name;
     }
+
 
 
 

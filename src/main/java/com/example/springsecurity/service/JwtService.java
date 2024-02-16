@@ -3,6 +3,7 @@ package com.example.springsecurity.service;
 
 import com.example.springsecurity.model.Token;
 import com.example.springsecurity.repository.TokenRepository;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -42,10 +43,10 @@ public class JwtService {
     }
 
     public String generateToken( UserDetails userDetails) {
-        System.out.println(userDetails.getUsername());
         return Jwts
                 .builder()
                 .setSubject(userDetails.getUsername())
+                .claim("authorities", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toArray())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getSinginKey(), SignatureAlgorithm.HS256)

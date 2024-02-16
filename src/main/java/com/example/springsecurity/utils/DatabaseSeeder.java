@@ -26,11 +26,12 @@ public class DatabaseSeeder implements CommandLineRunner {
     public void seedAuthorities() {
         if (authorityRepository.count() == 0) {
         authorityRepository.saveAll(List.of(
-                new Authority(1, "CAN_EDIT"),
-                new Authority(2, "CAN_ADD"),
-                new Authority(3, "CAN_DELETE"),
-                new Authority(4, "CAN_VIEW")
+                new Authority("CAN_EDIT"),
+                new Authority("CAN_ADD"),
+                new Authority("CAN_DELETE"),
+                new Authority("CAN_VIEW")
         ));
+
         }
     }
 }

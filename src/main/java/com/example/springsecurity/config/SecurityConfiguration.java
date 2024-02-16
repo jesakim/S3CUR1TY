@@ -37,6 +37,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(
                         req -> req
                                 .requestMatchers(WHITE_LIST).permitAll()
+                                //user shoud have CAN_VIEW authority to access /api/user
+                                .requestMatchers("/api/user/me").hasAuthority("CAN_VIEW")
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
